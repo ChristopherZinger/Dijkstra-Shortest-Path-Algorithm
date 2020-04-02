@@ -8,14 +8,25 @@ from settings import (
 
 
 class Node:
-    def __init__(self, x=None, y=None):
+    def __init__(self, x=None, y=None, name=None, prev_node=None):
+        self.name = name
+        self.prev_node = prev_node
+        self.distance = 1000000000
         self.x = x
         self.y = y
+        self.address = [x,y]
         self.wx= grid_x-1
         self.wy=grid_y-1
-        self.color = colors['white']
+        self.color = colors['cream']
 
-        print(self.x)
+    def adjacent_addresses(self):
+        vectors = (
+            [-1*grid_x,0],
+            [grid_x,0],
+            [0,grid_y],
+            [0,-1*grid_y],
+        )
+        return [ [self.x+v[0], self.y+v[1]] for v in vectors ]
 
     def draw(self):
         pygame.draw.rect(
@@ -31,8 +42,9 @@ def create_grid(nr_of_rows, nr_of_collumns):
         for collumn in range(nr_of_collumns):
             node_list.append(
                 Node(
-                    x=row*grid_x+grid_start_x,
-                    y=collumn*grid_x+grid_start_y
+                    name='{}-{}'.format(collumn, row),
+                    x=collumn*grid_x+grid_start_y,
+                    y=row*grid_x+grid_start_x,
                 )
             )
     return node_list
