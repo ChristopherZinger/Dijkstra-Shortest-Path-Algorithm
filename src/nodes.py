@@ -28,6 +28,14 @@ class Node:
         )
         return [ [self.x+v[0], self.y+v[1]] for v in vectors ]
 
+    def click_check(self, mouse):
+        if (
+            (self.x <= mouse[0] and self.x + self.wx >= mouse[0])
+            and
+            (self.y <= mouse[1] and self.y + self.wy >= mouse[1])
+        ):
+            return True
+
     def draw(self):
         pygame.draw.rect(
             DISPLAYSURF,
