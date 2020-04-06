@@ -12,7 +12,7 @@ from buttons import Btn
 
 '''
 TODO:
--add text to buttons
+- reset button downd nore resets wolls
 '''
 btn_width = 100
 btn_gap = 5
@@ -27,12 +27,14 @@ btn_run = Btn(
     )
 btn_endpoints = Btn(
     grid_start_x+((btn_width + btn_gap)*2), grid_start_y-40,
-    btn_width,35,'start | end',
+    btn_width,35,'endpoints',
     )
 btn_walls = Btn(
     grid_start_x+((btn_width + btn_gap)*3), grid_start_y-40,
     btn_width,35,'add walls',
     )
+
+
 
 class Path:
     def __init__(self, start, end):
@@ -89,21 +91,15 @@ class Path:
         return nodes
 
 
-
-
-
-
 def add_endpoints():
     global NODES_TO_CHECK, PATH
     endpoints = [
         ['start','orange'],
         ['end','dark']
         ]
-
     #reset colors
     for node in NODES_TO_CHECK:
         node.color = colors['cream']
-
     #highlight hovered node
     for i, endpoint in enumerate(endpoints):
         flag = True
@@ -129,8 +125,6 @@ def add_endpoints():
                                 PATH.set_end(node)
             render()
 
-
-
 def get_events():
     global PATH
     # check for exit
@@ -154,7 +148,6 @@ def get_events():
                 btn_walls.toggles_state()
                 if btn_walls.state:
                      remove_nodes()
-
         if event.type == pygame.KEYDOWN:
             # run path finder
             if event.key == pygame.K_RETURN:
@@ -167,8 +160,6 @@ def reset_grid():
         if node != PATH.start and node != PATH.end:
             node.color = colors['cream']
 
-
-
 def render():
     global NODES_TO_CHECK
     # RENDER ELEMENTS
@@ -179,7 +170,8 @@ def render():
     btn_run.draw()
     btn_endpoints.draw()
     btn_walls.draw()
-    # # reset first and last node color
+    # text text
+
 
     # UPDATE SURFACE
     pygame.display.update()

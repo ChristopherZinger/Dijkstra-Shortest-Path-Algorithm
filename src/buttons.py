@@ -1,7 +1,7 @@
 import pygame, sys
 from settings import DISPLAYSURF, colors
 
-
+pygame.init()
 
 class Btn:
     def __init__(self, x, y, wx, wy, text, color=colors['cream']):
@@ -13,12 +13,18 @@ class Btn:
         self.color = color
         self.state = False
 
+        self.font = pygame.font.SysFont("Agency FB", 21)
+        self.text = self.font.render(text, True, colors['dark'])
+
+
     def draw(self):
         pygame.draw.rect(
             DISPLAYSURF,
             self.color,
             (self.x, self.y, self.wx, self.wy)
         )
+        DISPLAYSURF.blit(self.text,
+                (self.x + ((self.wx - self.text.get_width())//2) , self.y + ((self.wy - self.text.get_height())//2)))
 
     def click_check(self, mouse):
         if (
