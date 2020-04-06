@@ -1,10 +1,11 @@
 import pygame, sys
 from settings import DISPLAYSURF, colors
 
-pygame.init()
+pygame.init() # required to use pytgame fonts
 
 class Btn:
     def __init__(self, x, y, wx, wy, text, color=colors['cream']):
+
         self.x = x
         self.y = y
         self.wx = wx
@@ -12,10 +13,8 @@ class Btn:
         self.text = text
         self.color = color
         self.state = False
-
         self.font = pygame.font.SysFont("Agency FB", 21)
         self.text = self.font.render(text, True, colors['dark'])
-
 
     def draw(self):
         pygame.draw.rect(

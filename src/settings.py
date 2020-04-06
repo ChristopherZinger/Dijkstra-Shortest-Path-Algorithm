@@ -2,7 +2,7 @@ import pygame, sys, os
 BASE_DIR =  os.path.dirname(os.path.realpath(__file__))
 
 # Display settings
-FPS = 45
+FPS = 80
 
 # grid
 grid_x, grid_y = 25, 25

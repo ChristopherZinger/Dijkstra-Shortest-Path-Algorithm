@@ -42,14 +42,18 @@ class Path:
         self.end=None
         self.set_start(start)
         self.set_end(end)
+        self.nodes_to_check = [node for node in node_list]
 
     def set_start(self, new_start):
         if self.start:
+            print('reseting start distnace')
             self.start.distance = 1000000000
+            print('old start: ', self.start.distance)
             self.start.color = colors['cream']
         self.start = new_start
         self.start.distance = 0
         self.start.color = colors['orange']
+        print('new start: ', self.start.distance)
 
     def set_end(self, new_end):
         if self.end:
@@ -159,6 +163,8 @@ def reset_grid():
     for node in NODES_TO_CHECK:
         if node != PATH.start and node != PATH.end:
             node.color = colors['cream']
+        if node != PATH.start:
+            node.distance = 1000000000
 
 def render():
     global NODES_TO_CHECK
@@ -222,8 +228,9 @@ def remove_nodes():
 
 if __name__=='__main__':
 
-    PATH = Path(node_list[1],node_list[512])
+
     pygame.init()
+    PATH = Path(node_list[1],node_list[512])
 
     #Caption
     pygame.display.set_caption('Dijkstra Shortes Path Algorithm - Visualisation')
